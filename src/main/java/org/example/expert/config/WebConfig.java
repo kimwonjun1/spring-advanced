@@ -13,11 +13,11 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     private final AdminInterceptor adminInterceptor;
+    private final AuthUserArgumentResolver authUserArgumentResolver;
 
-    // ArgumentResolver 등록
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new AuthUserArgumentResolver());
+        resolvers.add(authUserArgumentResolver);
     }
 
     @Override

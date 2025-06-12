@@ -29,6 +29,10 @@ public class AdminApiLoggingAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         AuthUser authUser = (AuthUser) request.getAttribute("authUser");
 
+        if (authUser == null) {
+            logger.warn("Admin API Request, authUser not found in request attribute. Check filter chain or Interceptor.");
+        }
+
         String userId = authUser != null ? String.valueOf(authUser.getId()) : "UNKNOWN";
         String url = request.getRequestURI();
         String time = LocalDateTime.now().toString();
